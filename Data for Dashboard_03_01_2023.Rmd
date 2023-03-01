@@ -1,0 +1,33 @@
+---
+title: "Data for Deliverable 1 Plot"
+output: html_notebook
+---
+
+
+```{r - DataPrep-Electric_Vehicles}
+# clean memory
+rm(list = ls())
+# read in data
+link='https://github.com/mackek2/BigData/blob/main/Electric_Vehicle_Population_Data.csv?raw=true'
+big=read.csv(link)
+
+#reading the data
+names(big)
+str(big,width = 70,strict.width='cut')
+
+# Create the Frequency Table
+elecTab=table(big$County)
+elecTabP=round(100*prop.table(elecTab),2)
+elecDF=as.data.frame(elecTabP)
+names(elecDF)=c("county",'share')
+elecDF$count=as.vector(elecTab)
+elecDF_1=elecDF[elecDF$share>=1,]
+
+# Order by Share
+elecDF_1=elecDF_1[order(elecDF_1$share),]
+
+# save data frame: ElectricVehicleDataFrame
+write.csv(elecDF_1,"electricvehicledataframe.csv",row.names = F)
+```
+
+
