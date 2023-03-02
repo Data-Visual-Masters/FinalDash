@@ -1,0 +1,25 @@
+---
+title: "Data for Deliverable 3 Plot"
+output: html_notebook
+---
+
+```{r - DataPrep-Emissions}
+# clean memory
+rm(list = ls())
+# read in data
+linkMap="https://github.com/PublicaMundi/MappingAPI/raw/master/data/geojson/us-states.json"
+
+link='https://github.com/Data-Visual-Masters/Deliverable3/raw/main/state_percapita_CO2emissions.csv'
+
+carbondata=read.csv(link)
+
+#reading the data
+str(carbondata)
+
+#Create a data frame
+(carbonTable=as.data.frame(carbondata))
+
+# save data frame: EmissionsDataFrame
+write.csv(carbonTable,"emissionsdataframe.csv",row.names = F)
+```
+
