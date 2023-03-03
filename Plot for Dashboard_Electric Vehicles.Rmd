@@ -1,5 +1,5 @@
 ---
-title: "Plot for Dashboard - Electric Vehicles"
+title: "Plot for Dashboards"
 output: html_notebook
 ---
 
