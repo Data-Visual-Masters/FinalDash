@@ -92,4 +92,12 @@ saveRDS(plot5, file = "ElectricVehiclePlot.rds")
 
 ```
 
+```{r - Plot for Emissions Data}
+# clean memory
+rm(list = ls()) 
+#read in data frame
+carbonTable=read.csv("emissionsdataframe.csv")
+
+#Create Emissions Map
+```
 

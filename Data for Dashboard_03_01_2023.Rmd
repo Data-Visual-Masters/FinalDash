@@ -1,5 +1,5 @@
 ---
-title: "Data for Deliverable 1 Plot"
+title: "Data for Dashboards"
 output: html_notebook
 ---
 
@@ -30,4 +30,22 @@ elecDF_1=elecDF_1[order(elecDF_1$share),]
 write.csv(elecDF_1,"electricvehicledataframe.csv",row.names = F)
 ```
 
+
+```{r - DataPrep-Emissions}
+# clean memory
+rm(list = ls())
+# read in data
+link='https://github.com/Data-Visual-Masters/Deliverable3/raw/main/state_percapita_CO2emissions.csv'
+
+carbondata=read.csv(link)
+
+#reading the data
+str(carbondata)
+
+#Create a data frame
+(carbonTable=as.data.frame(carbondata))
+
+# save data frame: EmissionsDataFrame
+write.csv(carbonTable,"emissionsdataframe.csv",row.names = F)
+```
 
