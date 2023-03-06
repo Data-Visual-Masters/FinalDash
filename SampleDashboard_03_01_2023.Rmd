@@ -31,6 +31,6 @@ Column {data-width=350}
 ### Chart C
 
 ```{r}
-
+readRDS("EmissionsPlot.rds")
 ```
 

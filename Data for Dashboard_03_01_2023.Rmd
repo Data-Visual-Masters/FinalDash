@@ -35,6 +35,15 @@ write.csv(elecDF_1,"electricvehicledataframe.csv",row.names = F)
 # clean memory
 rm(list = ls())
 # read in data
+
+library(usmap)
+
+plot_usmap (regions = "states")
+
+linkMap="https://github.com/PublicaMundi/MappingAPI/raw/master/data/geojson/us-states.json"
+
+library(sf)
+
 link='https://github.com/Data-Visual-Masters/Deliverable3/raw/main/state_percapita_CO2emissions.csv'
 
 carbondata=read.csv(link)
