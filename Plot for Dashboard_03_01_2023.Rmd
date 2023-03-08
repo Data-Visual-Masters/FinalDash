@@ -46,11 +46,91 @@ plot5 = plot4 + geom_text(vjust=0,
                               label = paste0(round(share,2), '%')))
 plot5
 ```
-
-
 ```{r - Save Plot as RDS}
 #save plot
 saveRDS(plot5, file = "ElectricVehiclePlot.rds")
+
+```
+
+```{r - Plot for Fremont Bikes}
+# clean memory
+rm(list = ls()) 
+#read in data frame
+fremontDF=readRDS("fremontdata.rds")
+
+# Create Plot for Electric Vehicle Bar Chart
+library(ggplot2)
+library(lubridate)
+library(ggrepel)
+
+#limits x axis to 2020 and beyond
+start <- as.Date("2020-1-1")
+end <- NA
+base=ggplot(fremontDF,
+            aes(x=Date,y=Fremont.Bridge.Total))
+base  + geom_line(alpha=0.3) + scale_x_date(limits = c(start, end)) 
+
+base=ggplot(fremontDF,
+            aes(x=floor_date(Date, "month"),
+                y=Fremont.Bridge.Total))
+monthly= base  + geom_line(alpha=0.3) 
+monthly= monthly + scale_x_date(limits = c(start, end))
+monthly
+
+#attempt at analyzing monthly data
+base=ggplot(fremontDF,
+            aes(x=Date,
+                y=Fremont.Bridge.Total))
+monthly= base  + geom_line(alpha=0.3) 
+monthly= monthly + scale_x_date(limits = c(start, end))
+# adding a trend:
+monthly = monthly + stat_smooth(color = "red",
+                      method = "loess")
+#monthly + facet_wrap(~crime)
+monthly
+
+#use ggrepel package to show labels, limiting the labels to only the highest values
+
+monthlylabel = monthly + geom_text_repel(aes(label=ifelse(Fremont.Bridge.Total>=700,Fremont.Bridge.Total, "")),size=2,
+                        min.segment.length = 0,
+                        max.overlaps = 100)
+
+#Referenced monthlylabel as base plot
+monthlylabel
+
+# Defining the title
+the_Title="Frequency of Bike Use on Fremont Bridge"
+the_Subtitle="Jan 2020 - Sept 2022"
+# Adding the titles
+monthly2= monthlylabel + ggtitle (label = the_Title,
+                             subtitle = the_Subtitle)
+# Run plot again
+monthly2
+
+# Axes titles to be used
+horizontalTitle = "Date"
+verticalTitle = "Number of Bike Trips"
+# Adding the titles to the axes
+monthly3 = monthly2 +xlab(horizontalTitle) + ylab (verticalTitle)
+# Run plot again
+monthly3
+
+# Adding the data source
+theSource = "Source: Seattle Open Data Portal (City of Seattle, 2022)"
+# Adding the source
+monthly4 = monthly3 + labs(caption = theSource)
+# Run the plot
+monthly4
+
+# Getting rid of background
+monthly5 = monthly4 + theme_classic()
+# Run plot
+monthly5
+```
+
+```{r - Save Plot as RDS}
+#save plot
+saveRDS(monthly5, file = "FremontPlot.rds")
 
 ```
 

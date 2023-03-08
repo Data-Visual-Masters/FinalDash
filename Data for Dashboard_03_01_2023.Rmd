@@ -29,7 +29,30 @@ elecDF_1=elecDF_1[order(elecDF_1$share),]
 # save data frame: ElectricVehicleDataFrame
 write.csv(elecDF_1,"electricvehicledataframe.csv",row.names = F)
 ```
+```{r - DataPrep-Fremont_Bikes}
+# clear memory
+rm(list = ls())
+# collecting the data
+link='https://github.com/Data-Visual-Masters/Deliverable2/raw/main/Fremont_Bridge_Bicycle_Counter.csv'
+fremont=read.csv(link)
 
+#Let's see what kind of data we have in our data table:
+#categorical? numerical?
+str(fremont,width = 50,strict.width='cut')
+
+#sets our date variable format as m/d/y
+fremont$Date=as.Date(fremont$Date,format = "%m/%d/%Y")
+
+#sets our bridge count variable to numeric
+fremont$Fremont.Bridge.Total=as.numeric(fremont$Fremont.Bridge.Total)
+
+saveRDS(fremont, file = "fremontdata.rds")
+```
+
+
+```{r}
+aggregate(data=fremont,Fremont.Bridge.Total~Date,FUN =sum )
+```
 
 ```{r - DataPrep-Emissions}
 # clean memory

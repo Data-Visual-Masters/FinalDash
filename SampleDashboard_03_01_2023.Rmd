@@ -22,13 +22,13 @@ readRDS("ElectricVehiclePlot.rds")
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Fremont Bridge Bike Usage
 
 ```{r}
-
+readRDS("FremontPlot.rds")
 ```
 
-### Chart C
+### Carbon Emissions Comparison
 
 ```{r}
 readRDS("EmissionsPlot.rds")
