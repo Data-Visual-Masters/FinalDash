@@ -1,36 +1,38 @@
 ---
-title: "Final Project - DRAFT"
+title: "Data Visual Masters - Final Dashboard"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
----
+    
+Page 1
+====================================================================
+
+Column {data-width=600}
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
 ```
 
-Column {data-width=650}
------------------------------------------------------------------------
+### Carbon Emissions in the U.S.
 
-### Electric Vehicle Use By County
+```{r}
+readRDS("emissions.rds")
+```
+
+Page 2 {data-orientation=rows}
+=====================================
+
+Row {data-height=600}
+-------------------------------------
+
+### Electric Vehicle Use By County in WA State
 
 ```{r}
 readRDS("ElectricVehiclePlot.rds")
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
-
-### Fremont Bridge Bike Usage
+### Fremont Bridge Bike Usage in Seattle
 
 ```{r}
 readRDS("FremontPlot.rds")
-```
-
-### Carbon Emissions Comparison
-
-```{r}
-readRDS("emissions.rds")
 ```
 
