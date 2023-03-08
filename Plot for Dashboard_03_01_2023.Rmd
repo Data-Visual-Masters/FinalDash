@@ -138,7 +138,7 @@ saveRDS(monthly5, file = "FremontPlot.rds")
 # clean memory
 rm(list = ls()) 
 #read in data frame
-carbonTable=read.csv("emissionsdataframe.csv")
+#carbonTable=read.csv("emissionsdataframe.csv")
 
 #Create Emissions Map
 ```
@@ -201,7 +201,7 @@ state_labels <- merge(highstate, centroid_labels, by = "fips")
 
 ```{r}
 #second way using usmap package instead
-plot_usmap(data = carbonindex, values = "Percent", color = "black") +
+emissions=plot_usmap(data = carbonindex, values = "Percent", color = "black") +
     #adds state abbr labels
   geom_text(data = state_labels, aes(x = x, y = y, label = stateabbr,), color = "black") +
   labs(title = "CO2 Emissions in the United States",
@@ -213,10 +213,11 @@ plot_usmap(data = carbonindex, values = "Percent", color = "black") +
            breaks = c(0, 100)) + 
   #puts box around map, cleans up presentation
   theme(legend.position = "bottom", panel.background = element_rect(color='black'), legend.key.size = unit(0.4, "cm"), plot.title = element_text(size=14))
+emissions
 ```
 
 ```{r - save plot as RDS}
 #save plot
-saveRDS(plot_usmap, file = "EmissionsPlot.rds")
+saveRDS(emissions, file = "emissions.rds")
 ```
 
